@@ -8,7 +8,7 @@ public class Brick : MonoBehaviour
     {
         if (col.gameObject.tag == "Ball")
         {
-            Destroy(gameObject);
+            // Destroy(gameObject);
         }
     }
 }

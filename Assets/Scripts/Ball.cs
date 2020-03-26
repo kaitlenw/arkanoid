@@ -11,7 +11,7 @@ public class Ball : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        rb.velocity = Vector2.up * speed;
+        rb.velocity = (Vector2.up + new Vector2(Random.Range(-0.50f, 0.5f), 0)) * speed;
     }
 
     void OnCollisionEnter2D(Collision2D col) 
@@ -27,6 +27,15 @@ public class Ball : MonoBehaviour
 
             // Set Velocity with dir * speed
             rb.velocity = dir * speed;
+        }
+        else 
+        {
+            if (col.gameObject.tag == "Brick")
+            {
+                Destroy(col.gameObject);
+                Debug.Log("Bounce");
+            }
+            rb.velocity = Vector3.Reflect(rb.velocity, col.GetContact(0).normal);
         }
     }
     float hitFactor(Vector2 ballPos, Vector2 racketPos, float racketWidth) 
