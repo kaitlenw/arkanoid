@@ -8,15 +8,19 @@ public class Paddle : MonoBehaviour
     private Rigidbody2D rb;
     public float speed;
 
-    private Vector2 minBound;
-    private Vector2 maxBound;
-
+    public float minBound;
+    public float maxBound;
+    public bool overrideBounds = false;
+    
     private float halfWidth;
     void Start()
     {
-        float camDistance = Vector3.Distance(transform.position, Camera.main.transform.position);
-        minBound = Camera.main.ViewportToWorldPoint(new Vector3(0,0,camDistance));
-        maxBound = Camera.main.ViewportToWorldPoint(new Vector3(1,1,camDistance));
+        if (!overrideBounds)
+        {
+            float camDistance = Vector3.Distance(transform.position, Camera.main.transform.position);
+            minBound = Camera.main.ViewportToWorldPoint(new Vector3(0,0,camDistance)).x;
+            maxBound = Camera.main.ViewportToWorldPoint(new Vector3(1,1,camDistance)).x;
+        }
         halfWidth = GetComponent<SpriteRenderer>().bounds.size.x/2;
         rb = gameObject.GetComponent<Rigidbody2D>();
     }
@@ -24,7 +28,7 @@ public class Paddle : MonoBehaviour
     {
         float x = Input.GetAxis("Horizontal");
         Vector3 newPosition = transform.position + new Vector3(x*speed, 0, 0);
-        if ((newPosition.x > minBound.x + halfWidth) && (newPosition.x < maxBound.x - halfWidth))
+        if ((newPosition.x > minBound + halfWidth) && (newPosition.x < maxBound - halfWidth))
         {
             rb.MovePosition(newPosition);
         }

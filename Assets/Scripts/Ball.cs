@@ -33,7 +33,6 @@ public class Ball : MonoBehaviour
             if (col.gameObject.tag == "Brick")
             {
                 Destroy(col.gameObject);
-                Debug.Log("Bounce");
             }
             rb.velocity = Vector3.Reflect(rb.velocity, col.GetContact(0).normal);
         }
