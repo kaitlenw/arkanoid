@@ -7,16 +7,23 @@ public class Ball : MonoBehaviour
 
     public float speed;
     private Rigidbody2D rb;
+    private bool gameHasStarted = false;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        rb.velocity = (Vector2.up + new Vector2(Random.Range(-0.50f, 0.5f), 0)) * speed;
     }
 
+    void Update()
+    {
+        if ((!gameHasStarted) && Input.GetButton("Jump"))
+        {
+            rb.velocity = (Vector2.up + new Vector2(Random.Range(-0.50f, 0.5f), 0)) * speed;
+            gameHasStarted = true;
+        }
+    }
     void OnCollisionEnter2D(Collision2D col) 
     {
-        // Hit the Racket?
         if (col.gameObject.tag == "Paddle") 
         {
             // Calculate hit Factor
