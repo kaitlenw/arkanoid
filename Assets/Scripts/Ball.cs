@@ -61,7 +61,15 @@ public class Ball : MonoBehaviour
         {
             if (col.gameObject.tag == "Brick")
             {
+                bool hasWon = col.gameObject.transform.parent.GetComponent<Bricks>().RemoveBrick(col.gameObject);
                 Destroy(col.gameObject);
+                if (hasWon)
+                {
+                    rb.velocity = Vector2.zero;
+                    transform.position = startPos;
+                    winPanel.SetActive(true);
+                    return;
+                }
             }
             rb.velocity = Vector3.Reflect(rb.velocity, col.GetContact(0).normal);
         }
