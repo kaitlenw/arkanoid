@@ -16,6 +16,10 @@ public class Ball : MonoBehaviour
     public GameObject lifeDisplay;
     public GameObject winPanel;
     public GameObject gameOverPanel;
+
+    private AudioSource source;
+    public AudioClip brickSFX;
+    public AudioClip paddleSFX;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -23,6 +27,7 @@ public class Ball : MonoBehaviour
         livesLeft = startLives;
         winPanel.SetActive(false);
         gameOverPanel.SetActive(false);
+        source = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -35,18 +40,7 @@ public class Ball : MonoBehaviour
     }
     void OnCollisionEnter2D(Collision2D col) 
     {
-        if (col.gameObject.tag == "Paddle") 
-        {
-            // Calculate hit Factor
-            float x = hitFactor(transform.position,col.transform.position, col.collider.bounds.size.x);
-
-            // Calculate direction, set length to 1
-            Vector2 dir = new Vector2(x, 1).normalized;
-
-            // Set Velocity with dir * speed
-            rb.velocity = dir * speed;
-        }
-        else if (col.gameObject.tag == "Floor")
+        if (col.gameObject.tag == "Floor")
         {
             gameHasStarted = false;
             rb.velocity = Vector2.zero;
@@ -59,8 +53,13 @@ public class Ball : MonoBehaviour
         }
         else 
         {
+            if (col.gameObject.tag == "Paddle") 
+            {
+                source.PlayOneShot(paddleSFX);
+            }
             if (col.gameObject.tag == "Brick")
             {
+                source.PlayOneShot(brickSFX);
                 bool hasWon = col.gameObject.transform.parent.GetComponent<Bricks>().RemoveBrick(col.gameObject);
                 Destroy(col.gameObject);
                 if (hasWon)
@@ -73,15 +72,6 @@ public class Ball : MonoBehaviour
             }
             rb.velocity = Vector3.Reflect(rb.velocity, col.GetContact(0).normal);
         }
-    }
-    float hitFactor(Vector2 ballPos, Vector2 racketPos, float racketWidth) 
-    {
-        // ascii art:
-        //
-        // 1  -0.5  0  0.5   1  <- x value
-        // ===================  <- racket
-        //
-        return (ballPos.x - racketPos.x) / racketWidth;
     }
 
     void OnGUI()

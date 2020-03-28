@@ -5896,6 +5896,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Paddle
       objectReference: {fileID: 0}
+    - target: {fileID: 3894323925176491005, guid: bfb85cffb2b794a4eb6bef3df5b931c7,
+        type: 3}
+      propertyPath: m_TagString
+      value: Paddle
+      objectReference: {fileID: 0}
     - target: {fileID: 3894323925176491007, guid: bfb85cffb2b794a4eb6bef3df5b931c7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5960,6 +5965,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -5599994438116539164, guid: f16e02ae496514e1db128fafa3f312d8,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: -5599994438116539164, guid: f16e02ae496514e1db128fafa3f312d8,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5264084983436130455, guid: f16e02ae496514e1db128fafa3f312d8,
         type: 3}
       propertyPath: m_Name
@@ -6039,7 +6054,7 @@ PrefabInstance:
     - target: {fileID: 5264084983436130458, guid: f16e02ae496514e1db128fafa3f312d8,
         type: 3}
       propertyPath: startLives
-      value: 4
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5264084983436130458, guid: f16e02ae496514e1db128fafa3f312d8,
         type: 3}
@@ -6051,5 +6066,20 @@ PrefabInstance:
       propertyPath: winPanel
       value: 
       objectReference: {fileID: 498694005}
+    - target: {fileID: 5264084983436130458, guid: f16e02ae496514e1db128fafa3f312d8,
+        type: 3}
+      propertyPath: sfx
+      value: 
+      objectReference: {fileID: 8300000, guid: 0d994b70272a042e187ce76c7e9f285e, type: 3}
+    - target: {fileID: 5264084983436130458, guid: f16e02ae496514e1db128fafa3f312d8,
+        type: 3}
+      propertyPath: brickSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 0d994b70272a042e187ce76c7e9f285e, type: 3}
+    - target: {fileID: 5264084983436130458, guid: f16e02ae496514e1db128fafa3f312d8,
+        type: 3}
+      propertyPath: paddleSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: dd20cbb1ab1fd4687a02153606795f93, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f16e02ae496514e1db128fafa3f312d8, type: 3}
